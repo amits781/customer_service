@@ -1,0 +1,159 @@
+swagger: "2.0"
+info:
+  description: "This is a producer microservice. This service takes the input as a JSOn and pushes the data into the kafka. The endpoints here are also secured and are accessible using auth tokens only."
+  version: "1.0.0"
+  title: "Kafka Producer"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/v2"
+tags:
+- name: "customer"
+  description: "Endpoints for Customer Service"
+schemes:
+- "http"
+paths:
+  /customer:
+    post:
+      tags:
+      - "customer"
+      summary: "Send a customer object to kafka"
+      description: ""
+      operationId: "addCustomer"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+        required: true
+      - in: "header"
+        name: "Transaction-Id"
+        type: "string"
+        required: true
+      - in: "header"
+        name: "Activity-Id"
+        type: "string"
+        required: true
+      - in: "body"
+        name: "body"
+        description: "Customer object that needs to be added to the kafka"
+        required: true
+        schema:
+          $ref: "#/definitions/Customer"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid Input"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - producer_auth: ["write"]
+securityDefinitions:
+  producer_auth:
+    type: "oauth2"
+    flow: "accessCode"
+    authorizationUrl: "https://example.com/oauth/authorize"
+    tokenUrl: "https://example.com/oauth/token"
+    scopes:
+      write: Grants write access
+definitions:
+  Address:
+    type: "object"
+    required:
+    - "addressLine1"
+    - "postalCode"
+    properties:
+      addressLine1:
+        type: "string"
+        maxLength: 5
+      addressLine2:
+        type: "string"
+      street:
+        type: "string"
+      postalCode:
+        type: "string"
+        maxLength: 5
+    xml:
+      name: "Address"
+  Customer:
+    type: "object"
+    required:
+    - "customerNumber"
+    - "firstName"
+    - "lastName"
+    - "birthdate"
+    - "country"
+    - "countryCode"
+    - "mobileNumber"
+    - "email"
+    - "customerStatus"
+    - "address"
+    properties:
+      customerNumber:
+        type: "string"
+        pattern: '^[a-zA-Z0-9]{10}$'
+        example: "C000000001"
+      firstName:
+        type: "string"
+        minLength: 10
+        maxLength: 50
+        example: "Aidyn"
+      lastName:
+        type: "string"
+        minLength: 10
+        maxLength: 50
+        example: "White"
+      birthdate:
+        type: "string"
+        pattern: '^\d{2}-\d{2}-\d{4}$'
+        example: "11-11-1991"
+      country:
+        type: "string"
+        example: "India"
+      countryCode:
+        maxLength: 2
+        type: "string"
+        example: "IN"
+      mobileNumber:
+        type: "string"
+        pattern: '^\d{10}$'
+      email:
+        type: "string"
+        format: "email"
+        maxLength: 50
+        example: "abc@xyz.com"
+      customerStatus:
+        type: "string"
+        description: "Customer Status"
+        enum:
+        - "Open"
+        - "Close"
+        - "Suspended"
+        - "Restored"
+      address :
+        $ref: "#/definitions/Address"
+    xml:
+      name: "Customer"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
