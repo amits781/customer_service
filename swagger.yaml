@@ -51,11 +51,126 @@ paths:
         "201":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/ApiResponse"
+            type: "object"
+            properties:
+              code:
+                type: "integer"
+                format: "int32"
+                example: "201"
+              status:
+                type: "string"
+                example: "success"
+              message:
+                type: "string"
+                example: "customer object pushed to kafka"
         "400":
-          description: "Invalid Input"
+          description: "failed operation"
           schema:
-            $ref: "#/definitions/ApiResponse"
+            type: "object"
+            properties:
+              code:
+                type: "integer"
+                format: "int32"
+                example: "400"
+              status:
+                type: "string"
+                example: "failed"
+              message:
+                type: "string"
+                example: "Error message"
+              errorType:
+                type: "string"
+                example: "ValidationException"
+        "401":
+          description: "failed operation"
+          schema:
+            type: "object"
+            properties:
+              code:
+                type: "integer"
+                format: "int32"
+                example: "401"
+              status:
+                type: "string"
+                example: "failed"
+              message:
+                type: "string"
+                example: "Error message"
+              errorType:
+                type: "string"
+                example: "InvalidRequestException"
+        "403":
+          description: "failed operation"
+          schema:
+            type: "object"
+            properties:
+              code:
+                type: "integer"
+                format: "int32"
+                example: "403"
+              status:
+                type: "string"
+                example: "failed"
+              message:
+                type: "string"
+                example: "Error message"
+              errorType:
+                type: "string"
+                example: "InvalidRequestException"
+        "404":
+          description: "failed operation"
+          schema:
+            type: "object"
+            properties:
+              code:
+                type: "integer"
+                format: "int32"
+                example: "404"
+              status:
+                type: "string"
+                example: "failed"
+              message:
+                type: "string"
+                example: "Error message"
+              errorType:
+                type: "string"
+                example: "NotFoundException"
+        "500":
+          description: "failed operation"
+          schema:
+            type: "object"
+            properties:
+              code:
+                type: "integer"
+                format: "int32"
+                example: "500"
+              status:
+                type: "string"
+                example: "failed"
+              message:
+                type: "string"
+                example: "Error message"
+              errorType:
+                type: "string"
+                example: "TokenException"
+        "503":
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              code:
+                type: "integer"
+                format: "int32"
+                example: "503"
+              status:
+                type: "string"
+                example: "failed"
+              message:
+                type: "string"
+                example: "Error message"
+              errorType:
+                type: "string"
+                example: "ServerException"
       security:
       - producer_auth: ["write"]
 securityDefinitions:
@@ -144,16 +259,6 @@ definitions:
         $ref: "#/definitions/Address"
     xml:
       name: "Customer"
-  ApiResponse:
-    type: "object"
-    properties:
-      code:
-        type: "integer"
-        format: "int32"
-      type:
-        type: "string"
-      message:
-        type: "string"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
