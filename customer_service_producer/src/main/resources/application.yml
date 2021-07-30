@@ -1,0 +1,11 @@
+security:
+  oauth2:
+    client:
+      client-id: ${CLIENT_ID:clientId}
+      client-secret: ${CLIENT_SECRET:client-secret}
+      access-token-validity-seconds: ${ACCESS_TOKEN_VALIDITY:900}
+      
+logging:
+  level:
+    org.springframework.web: DEBUG
+    com.example: INFO
