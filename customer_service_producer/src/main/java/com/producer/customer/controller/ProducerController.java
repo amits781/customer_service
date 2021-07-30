@@ -11,12 +11,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.producer.customer.model.Customer;
 
+/**
+ * Main controller for kafka related endpoints
+ * @author Amit kumar Sharma
+ *
+ */
 @RestController
 @RequestMapping("/kafka")
 public class ProducerController {
 
-  Logger logger = LoggerFactory.getLogger(ProducerController.class);
+  private final Logger logger = LoggerFactory.getLogger(ProducerController.class);
 
+  /**
+   * This function receives the Customer object as body
+   * and push it into kafka.
+   * @param transactionId
+   * @param activityId 
+   * @param customer 
+   */
   @PostMapping("/customer")
   public void publishCustomer(@RequestHeader(name = "Transaction-Id") String transactionId,
       @RequestHeader(name = "Activity-Id") String activityId,
