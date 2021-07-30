@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.producer.customer.model;
 
 import java.util.Objects;
 import javax.validation.constraints.*;
