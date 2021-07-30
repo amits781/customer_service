@@ -51,134 +51,80 @@ paths:
         "201":
           description: "successful operation"
           schema:
-            type: "object"
-            properties:
-              code:
-                type: "integer"
-                format: "int32"
-                example: "201"
-              status:
-                type: "string"
-                example: "success"
-              message:
-                type: "string"
-                example: "customer object pushed to kafka"
+            $ref: "#/definitions/CustomerResponse"
+          examples:
+                application/json:
+                  code: 201
+                  status: "success"
+                  message: "customer object with Transaction-Id {Tid} pushed to kafka"
         "400":
           description: "failed operation"
           schema:
-            type: "object"
-            properties:
-              code:
-                type: "integer"
-                format: "int32"
-                example: "400"
-              status:
-                type: "string"
-                example: "failed"
-              message:
-                type: "string"
-                example: "Error message"
-              errorType:
-                type: "string"
-                example: "ValidationException"
+            $ref: "#/definitions/CustomerErrorResponse"
+          examples:
+                application/json:
+                  code: 400
+                  status: "failed"
+                  message: "Error message"
+                  errorType: "ValidationException"
         "401":
           description: "failed operation"
           schema:
-            type: "object"
-            properties:
-              code:
-                type: "integer"
-                format: "int32"
-                example: "401"
-              status:
-                type: "string"
-                example: "failed"
-              message:
-                type: "string"
-                example: "Error message"
-              errorType:
-                type: "string"
-                example: "InvalidRequestException"
+            $ref: "#/definitions/CustomerErrorResponse"
+          examples:
+                application/json:
+                  code: 401
+                  status: "failed"
+                  message: "Error message"
+                  errorType: "AuthorizationException"
         "403":
           description: "failed operation"
           schema:
-            type: "object"
-            properties:
-              code:
-                type: "integer"
-                format: "int32"
-                example: "403"
-              status:
-                type: "string"
-                example: "failed"
-              message:
-                type: "string"
-                example: "Error message"
-              errorType:
-                type: "string"
-                example: "InvalidRequestException"
+            $ref: "#/definitions/CustomerErrorResponse"
+          examples:
+                application/json:
+                  code: 403
+                  status: "failed"
+                  message: "Error message"
+                  errorType: "AuthorizationException"
         "404":
           description: "failed operation"
           schema:
-            type: "object"
-            properties:
-              code:
-                type: "integer"
-                format: "int32"
-                example: "404"
-              status:
-                type: "string"
-                example: "failed"
-              message:
-                type: "string"
-                example: "Error message"
-              errorType:
-                type: "string"
-                example: "NotFoundException"
+            $ref: "#/definitions/CustomerErrorResponse"
+          examples:
+                application/json:
+                  code: 403
+                  status: "failed"
+                  message: "Error message"
+                  errorType: "NotFoundException"
         "500":
           description: "failed operation"
           schema:
-            type: "object"
-            properties:
-              code:
-                type: "integer"
-                format: "int32"
-                example: "500"
-              status:
-                type: "string"
-                example: "failed"
-              message:
-                type: "string"
-                example: "Error message"
-              errorType:
-                type: "string"
-                example: "TokenException"
+            $ref: "#/definitions/CustomerErrorResponse"
+          examples:
+                application/json:
+                  code: 403
+                  status: "failed"
+                  message: "Error message"
+                  errorType: "TokenException"
         "503":
           description: "failed operation"
           schema:
-            type: "object"
-            properties:
-              code:
-                type: "integer"
-                format: "int32"
-                example: "503"
-              status:
-                type: "string"
-                example: "failed"
-              message:
-                type: "string"
-                example: "Error message"
-              errorType:
-                type: "string"
-                example: "ServerException"
+            $ref: "#/definitions/CustomerErrorResponse"
+          examples:
+                application/json:
+                  code: 403
+                  status: "failed"
+                  message: "Error message"
+                  errorType: "ServerException"
       security:
       - producer_auth: ["write"]
 securityDefinitions:
   producer_auth:
     type: "oauth2"
     flow: "accessCode"
-    authorizationUrl: "https://example.com/oauth/authorize"
-    tokenUrl: "https://example.com/oauth/token"
+    authorizationUrl: "https://localhost:8080/oauth/authorize"
+    tokenUrl: "http://localhost:8080/oauth/token?grant_type=client_credentials&scope=write"
     scopes:
       write: Grants write access
 definitions:
@@ -259,6 +205,28 @@ definitions:
         $ref: "#/definitions/Address"
     xml:
       name: "Customer"
+  CustomerErrorResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      status:
+        type: "string"
+      message:
+        type: "string"
+      errorType:
+        type: "string"
+  CustomerResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      status:
+        type: "string"
+      message:
+        type: "string"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
