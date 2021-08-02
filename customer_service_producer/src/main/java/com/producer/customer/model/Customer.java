@@ -1,25 +1,22 @@
 package com.producer.customer.model;
 
 import java.util.Objects;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import org.springframework.validation.annotation.Validated;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.validation.annotation.Validated;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * Customer
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen",
-    date = "2021-07-28T09:11:13.365Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-07-30T09:53:41.649Z")
 
 
-public class Customer {
+public class Customer   {
   @JsonProperty("customerNumber")
   private String customerNumber = null;
 
@@ -49,11 +46,11 @@ public class Customer {
    */
   public enum CustomerStatusEnum {
     OPEN("Open"),
-
+    
     CLOSE("Close"),
-
+    
     SUSPENDED("Suspended"),
-
+    
     RESTORED("Restored");
 
     private String value;
@@ -92,13 +89,12 @@ public class Customer {
 
   /**
    * Get customerNumber
-   * 
    * @return customerNumber
-   **/
+  **/
   @ApiModelProperty(example = "C000000001", required = true, value = "")
   @NotNull
 
-  @Pattern(regexp = "^[a-zA-Z0-9]{10}$")
+@Pattern(regexp="^[a-zA-Z0-9]{10}$") 
   public String getCustomerNumber() {
     return customerNumber;
   }
@@ -114,13 +110,12 @@ public class Customer {
 
   /**
    * Get firstName
-   * 
    * @return firstName
-   **/
+  **/
   @ApiModelProperty(example = "Aidyn", required = true, value = "")
   @NotNull
 
-  @Size(min = 10, max = 50)
+@Size(min=10,max=50) 
   public String getFirstName() {
     return firstName;
   }
@@ -136,13 +131,12 @@ public class Customer {
 
   /**
    * Get lastName
-   * 
    * @return lastName
-   **/
+  **/
   @ApiModelProperty(example = "White", required = true, value = "")
   @NotNull
 
-  @Size(min = 10, max = 50)
+@Size(min=10,max=50) 
   public String getLastName() {
     return lastName;
   }
@@ -158,13 +152,12 @@ public class Customer {
 
   /**
    * Get birthdate
-   * 
    * @return birthdate
-   **/
+  **/
   @ApiModelProperty(example = "11-11-1991", required = true, value = "")
   @NotNull
 
-  @Pattern(regexp = "^\\d{2}-\\d{2}-\\d{4}$")
+@Pattern(regexp="^\\d{2}-\\d{2}-\\d{4}$") 
   public String getBirthdate() {
     return birthdate;
   }
@@ -180,9 +173,8 @@ public class Customer {
 
   /**
    * Get country
-   * 
    * @return country
-   **/
+  **/
   @ApiModelProperty(example = "India", required = true, value = "")
   @NotNull
 
@@ -202,13 +194,12 @@ public class Customer {
 
   /**
    * Get countryCode
-   * 
    * @return countryCode
-   **/
+  **/
   @ApiModelProperty(example = "IN", required = true, value = "")
   @NotNull
 
-  @Size(max = 2)
+@Size(max=2) 
   public String getCountryCode() {
     return countryCode;
   }
@@ -224,13 +215,12 @@ public class Customer {
 
   /**
    * Get mobileNumber
-   * 
    * @return mobileNumber
-   **/
+  **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
-  @Pattern(regexp = "^\\d{10}$")
+@Pattern(regexp="^\\d{10}$") 
   public String getMobileNumber() {
     return mobileNumber;
   }
@@ -246,13 +236,12 @@ public class Customer {
 
   /**
    * Get email
-   * 
    * @return email
-   **/
+  **/
   @ApiModelProperty(example = "abc@xyz.com", required = true, value = "")
   @NotNull
 
-  @Size(max = 50)
+@Size(max=50) 
   public String getEmail() {
     return email;
   }
@@ -268,9 +257,8 @@ public class Customer {
 
   /**
    * Customer Status
-   * 
    * @return customerStatus
-   **/
+  **/
   @ApiModelProperty(required = true, value = "Customer Status")
   @NotNull
 
@@ -290,9 +278,8 @@ public class Customer {
 
   /**
    * Get address
-   * 
    * @return address
-   **/
+  **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
@@ -316,29 +303,28 @@ public class Customer {
       return false;
     }
     Customer customer = (Customer) o;
-    return Objects.equals(this.customerNumber, customer.customerNumber)
-        && Objects.equals(this.firstName, customer.firstName)
-        && Objects.equals(this.lastName, customer.lastName)
-        && Objects.equals(this.birthdate, customer.birthdate)
-        && Objects.equals(this.country, customer.country)
-        && Objects.equals(this.countryCode, customer.countryCode)
-        && Objects.equals(this.mobileNumber, customer.mobileNumber)
-        && Objects.equals(this.email, customer.email)
-        && Objects.equals(this.customerStatus, customer.customerStatus)
-        && Objects.equals(this.address, customer.address);
+    return Objects.equals(this.customerNumber, customer.customerNumber) &&
+        Objects.equals(this.firstName, customer.firstName) &&
+        Objects.equals(this.lastName, customer.lastName) &&
+        Objects.equals(this.birthdate, customer.birthdate) &&
+        Objects.equals(this.country, customer.country) &&
+        Objects.equals(this.countryCode, customer.countryCode) &&
+        Objects.equals(this.mobileNumber, customer.mobileNumber) &&
+        Objects.equals(this.email, customer.email) &&
+        Objects.equals(this.customerStatus, customer.customerStatus) &&
+        Objects.equals(this.address, customer.address);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(customerNumber, firstName, lastName, birthdate, country, countryCode,
-        mobileNumber, email, customerStatus, address);
+    return Objects.hash(customerNumber, firstName, lastName, birthdate, country, countryCode, mobileNumber, email, customerStatus, address);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Customer {\n");
-
+    
     sb.append("    customerNumber: ").append(toIndentedString(customerNumber)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
@@ -354,7 +340,8 @@ public class Customer {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

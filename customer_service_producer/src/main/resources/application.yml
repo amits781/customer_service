@@ -4,8 +4,17 @@ security:
       client-id: ${CLIENT_ID:clientId}
       client-secret: ${CLIENT_SECRET:client-secret}
       access-token-validity-seconds: ${ACCESS_TOKEN_VALIDITY:900}
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources.add-mappings: false
       
 logging:
   level:
-    org.springframework.web: DEBUG
-    com.example: INFO
+    org.springframework.web: INFO
+    com.producer: INFO

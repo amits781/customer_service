@@ -1,20 +1,19 @@
 package com.producer.customer.model;
 
 import java.util.Objects;
-import javax.validation.constraints.*;
-import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.validation.annotation.Validated;
+import javax.validation.constraints.*;
 
 /**
  * Address
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen",
-    date = "2021-07-28T09:11:13.365Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-07-30T09:53:41.649Z")
 
 
-public class Address {
+public class Address   {
   @JsonProperty("addressLine1")
   private String addressLine1 = null;
 
@@ -34,13 +33,12 @@ public class Address {
 
   /**
    * Get addressLine1
-   * 
    * @return addressLine1
-   **/
+  **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
-  @Size(max = 5)
+@Size(max=5) 
   public String getAddressLine1() {
     return addressLine1;
   }
@@ -56,9 +54,8 @@ public class Address {
 
   /**
    * Get addressLine2
-   * 
    * @return addressLine2
-   **/
+  **/
   @ApiModelProperty(value = "")
 
 
@@ -77,9 +74,8 @@ public class Address {
 
   /**
    * Get street
-   * 
    * @return street
-   **/
+  **/
   @ApiModelProperty(value = "")
 
 
@@ -98,13 +94,12 @@ public class Address {
 
   /**
    * Get postalCode
-   * 
    * @return postalCode
-   **/
+  **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
-  @Size(max = 5)
+@Size(max=5) 
   public String getPostalCode() {
     return postalCode;
   }
@@ -123,10 +118,10 @@ public class Address {
       return false;
     }
     Address address = (Address) o;
-    return Objects.equals(this.addressLine1, address.addressLine1)
-        && Objects.equals(this.addressLine2, address.addressLine2)
-        && Objects.equals(this.street, address.street)
-        && Objects.equals(this.postalCode, address.postalCode);
+    return Objects.equals(this.addressLine1, address.addressLine1) &&
+        Objects.equals(this.addressLine2, address.addressLine2) &&
+        Objects.equals(this.street, address.street) &&
+        Objects.equals(this.postalCode, address.postalCode);
   }
 
   @Override
@@ -138,7 +133,7 @@ public class Address {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Address {\n");
-
+    
     sb.append("    addressLine1: ").append(toIndentedString(addressLine1)).append("\n");
     sb.append("    addressLine2: ").append(toIndentedString(addressLine2)).append("\n");
     sb.append("    street: ").append(toIndentedString(street)).append("\n");
@@ -148,7 +143,8 @@ public class Address {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

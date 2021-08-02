@@ -93,7 +93,7 @@ paths:
             $ref: "#/definitions/CustomerErrorResponse"
           examples:
                 application/json:
-                  code: 403
+                  code: 404
                   status: "failed"
                   message: "Error message"
                   errorType: "NotFoundException"
@@ -103,7 +103,7 @@ paths:
             $ref: "#/definitions/CustomerErrorResponse"
           examples:
                 application/json:
-                  code: 403
+                  code: 500
                   status: "failed"
                   message: "Error message"
                   errorType: "TokenException"
@@ -113,7 +113,7 @@ paths:
             $ref: "#/definitions/CustomerErrorResponse"
           examples:
                 application/json:
-                  code: 403
+                  code: 503
                   status: "failed"
                   message: "Error message"
                   errorType: "ServerException"
