@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.KafkaException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
@@ -23,7 +24,7 @@ public class ProducerExceptionHandler {
 	private static final String ERROR_LOG = "Request failed for TransactionId: {} | ActivityId: {} | Error : {}";
 
 	/**
-	 * To handle 400 exceptions, i.e not authenticated
+	 * To handle 401 exceptions, i.e not authenticated
 	 * 
 	 * @param exception
 	 * @param request
@@ -35,7 +36,7 @@ public class ProducerExceptionHandler {
 		logger.error(ERROR_LOG, request.getHeader(ProducerConstants.TRANSACTION_ID),
 				request.getHeader(ProducerConstants.ACTIVITY_ID), exception.getLocalizedMessage());
 		CustomerErrorResponse response = new CustomerErrorResponse();
-		response.setCode(400);
+		response.setCode(401);
 		response.setErrorType(exception.getClass().getSimpleName());
 		response.setMessage(exception.getLocalizedMessage());
 		response.setStatus(ProducerConstants.FAILED);
@@ -106,6 +107,26 @@ public class ProducerExceptionHandler {
 		response.setMessage(errors.toString());
 		response.setStatus(ProducerConstants.FAILED);
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	}
+
+	/**
+	 * To handle exceptions related to kafka
+	 * 
+	 * @param exception
+	 * @param request
+	 * @return CustomerErrorResponse with respective values
+	 */
+	@ExceptionHandler(KafkaException.class)
+	public ResponseEntity<CustomerErrorResponse> handleKafkaTimeOutException(KafkaException exception,
+			WebRequest request) {
+		logger.error(ERROR_LOG, request.getHeader(ProducerConstants.TRANSACTION_ID),
+				request.getHeader(ProducerConstants.ACTIVITY_ID), exception.getLocalizedMessage());
+		CustomerErrorResponse response = new CustomerErrorResponse();
+		response.setCode(503);
+		response.setErrorType(exception.getClass().getSimpleName());
+		response.setMessage(exception.getLocalizedMessage());
+		response.setStatus(ProducerConstants.FAILED);
+		return new ResponseEntity<>(response, HttpStatus.SERVICE_UNAVAILABLE);
 	}
 
 	/**

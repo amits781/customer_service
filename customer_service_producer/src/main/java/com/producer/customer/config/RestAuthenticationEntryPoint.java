@@ -12,6 +12,13 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
+/**
+ * Custom implementation for AuthenticationEntryPoint, throws
+ * AuthenticationException on validation error
+ * 
+ * @author Amit kumar Sharma
+ *
+ */
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 

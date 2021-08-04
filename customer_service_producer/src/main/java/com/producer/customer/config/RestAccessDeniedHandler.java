@@ -13,6 +13,13 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
+/**
+ * Custom implementation for AccessDeniedHandler, throws AccessDeniedException
+ * on validation error
+ * 
+ * @author Amit kumar Sharma
+ *
+ */
 @Component
 public class RestAccessDeniedHandler implements AccessDeniedHandler {
 

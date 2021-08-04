@@ -18,3 +18,11 @@ logging:
   level:
     org.springframework.web: INFO
     com.producer: INFO
+    
+  
+kafka:
+  bootstrapAddress: ${BOOTSTRAP_ADDRESS:localhost:9092}
+  
+message:
+  topic:
+    name: customer-queue

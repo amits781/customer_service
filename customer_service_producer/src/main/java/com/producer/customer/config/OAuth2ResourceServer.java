@@ -20,6 +20,7 @@ public class OAuth2ResourceServer extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+		// Configuring to use custom authenticationEntryPoint and accessDeniedHandler
 		resources.authenticationEntryPoint(authenticationEntryPoint()).accessDeniedHandler(accessDeniedHandler());
 	}
 
