@@ -46,8 +46,8 @@ public class ProducerController {
 			@RequestHeader(name = ProducerConstants.ACTIVITY_ID) String activityId,
 			@Valid @RequestBody Customer customer) {
 
-		logger.info("Request received TransactionId: {} | ActivityId: {}", transactionId, activityId);
-		logger.info("Request Body: \n {}", customer);
+		logger.info("Request received TransactionId: {} | ActivityId: {} | Body: \n {}", transactionId, activityId,
+				customer);
 
 		customerProducer.sendMessage(customer, transactionId, activityId);
 
@@ -56,6 +56,7 @@ public class ProducerController {
 		response.setStatus(ProducerConstants.SUCCESS);
 		response.setMessage("customer object with Transaction-Id: " + transactionId + " | Activity-Id: " + activityId
 				+ " pushed to kafka");
+		logger.info("Response sent: {}", response);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
